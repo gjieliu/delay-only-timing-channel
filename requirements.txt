@@ -1,0 +1,11 @@
+# Minimum versions required by the production chain.
+numpy>=1.22
+scipy
+mpmath
+matplotlib          # only for code/make_figs.py and paper_figure/make_fig2.py
+
+# Versions that produced the reported numbers, for exact reproduction:
+#   Monte Carlo / quadrature results : Python 3.11.15, numpy 2.4.4
+#   Delta_+ global certificate       : Python 3.12.2, mpmath 1.3.0, scipy 1.18.0
+# The stochastic scripts are bit-reproducible under the same numpy version;
+# results may differ in the last digits under a different one.

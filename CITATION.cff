@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: >-
+  If you use this code, please cite the manuscript it accompanies.
+title: >-
+  Numerical production code for "Capacity Bounds for Delay-Only Timing Channels
+  with Bounded Dwell"
+type: software
+authors:
+  - family-names: Liu
+    given-names: Guangjie
+    affiliation: >-
+      School of Electronics and Information Engineering, Nanjing University of
+      Information Science and Technology, Nanjing 210044, China
+    email: gjieliu@nuist.edu.cn
+  - family-names: Liu
+    given-names: Weiwei
+    affiliation: >-
+      School of Automation, Nanjing University of Science and Technology,
+      Nanjing 210094, China
+    email: lwwnjust@njust.edu.cn
+  - family-names: Ding
+    given-names: Huihui
+    affiliation: >-
+      School of Electronics and Information Engineering, Nanjing University of
+      Information Science and Technology, Nanjing 210044, China
+    email: dinghuihui@nuist.edu.cn
+license: MIT
+preferred-citation:
+  type: article
+  title: >-
+    Capacity Bounds for Delay-Only Timing Channels with Bounded Dwell
+  authors:
+    - family-names: Liu
+      given-names: Guangjie
+    - family-names: Liu
+      given-names: Weiwei
+    - family-names: Ding
+      given-names: Huihui
+  journal: IEEE Transactions on Information Theory
+  year: 2026
+  notes: Submitted.
