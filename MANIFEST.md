@@ -1,12 +1,10 @@
 # Manifest — every reported number, and the run that produces it
 
-This repository tracks source only. The files named below (`code/result/*.json`,
-`code/fig/*.pdf`) do not exist until you run `python3 run_all.py --full` in `code/`; the
-**Expected value** column is what that run should give, so this table doubles as a
-verification checklist.
+This repository tracks source only. The files named below (`result/*.json`, `fig/*.pdf`)
+do not exist until you run `python3 run_all.py --full`; the **Expected value** column is
+what that run should give, so this table doubles as a verification checklist.
 
-Field paths use `/` for nesting inside the JSON, e.g.
-`Exp(mean=2B)/partition/J_beta_hat`.
+Field paths use `/` for nesting inside the JSON, e.g. `Exp(mean=2B)/partition/J_beta_hat`.
 
 Two naming conventions need stating once, because the code was written in Chinese and the
 paper in English:
@@ -64,10 +62,11 @@ Data: `result/multires.json`, key `Exp(mean=2B)`, subkey `curves`, over `snr = B
 from 2^3 to 2^18; each entry carries `full_width_modulo`, `multires`, `single_threshold`,
 `single_b_over_B`.
 
-* `code/make_figs.py` draws the Chinese master's version into `code/fig/`.
-* The figure printed in the English manuscript is drawn by `paper_figure/make_fig2.py`
-  from a verbatim slice of the same key (README gives the one-line extraction command).
-  Only labels, fonts and canvas size differ; no value is recomputed.
+* `make_figs.py` draws the Chinese master's version into `fig/`.
+* The figure printed in the English manuscript is drawn by `make_fig2.py` from a verbatim
+  slice of the same key (the README gives the one-line extraction command). Only labels,
+  fonts and canvas size differ; no value is recomputed. The result matches the PDF in the
+  submission package except for the embedded `/CreationDate` timestamp.
 * The asymptote quoted in the text, `J_{beta_hat} = 2.548` at `beta_hat = 3.837`:
   `Exp(mean=2B)/partition/J_beta_hat` = 2.548001, `.../beta_hat` = 3.837144.
 * The decomposition quoted in Appendix F, `H = 1.459724` and `E[K] log2 beta = 1.088277`
@@ -162,7 +161,9 @@ tightness percentages in `families[*]/rows`. This script consumes `correlation_f
 * `result/gap.json` (from `gap_strategy.py`) — earlier gap summary at SNR 8/16/32/48,
   superseded by `multires.json/curves`.
 * `result/multires.json` keys `U(0,2B)`, `Exp(mean=B)`, `Exp(mean=B/2)` — additional
-  independent hosts; the paper tabulates three.
+  independent hosts; the paper tabulates three. Note that `Exp(mean=B)/partition/beta_hat`
+  moves in the sixth decimal across SciPy versions (4.187528 vs 4.187529), which is within
+  the tolerance of the bounded 1-D search. No quantity cited in the paper is affected.
 * `result/correlation_full.json` family `bing` / 丙 — a third correlated family.
 * `fig/fig_multires_rate.pdf`, `fig/fig_partition_penalty.pdf` — figures of the Chinese
   master; the submitted English manuscript carries one figure.

@@ -1,0 +1,9 @@
+# 产物。本仓库只收录源码，以下内容由 `python3 run_all.py --full` 重新生成。
+result/
+fig/
+fig2_data.json
+*.pdf
+
+__pycache__/
+*.py[cod]
+.DS_Store
