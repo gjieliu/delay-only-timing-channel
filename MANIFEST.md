@@ -49,6 +49,16 @@ In-text statements attached to the same table, all from
 | two grouping bounds confine the infimum to `beta in [1.05, 17]` | `compact_beta_interval`, `endpoint_lower_bounds` | [1.05, 17.0]; `beta_le_1.05` = 2.5592309664180948, `beta_ge_17` = 2.575293286002973 — both above the certified upper end 2.54800135, which is what excludes the two non-compact ends |
 | 80-digit interval branch-and-bound (search parameters listed in Appendix F) | `mp_dps`, `initial_cells`, `adaptive_splits`, `round_guard`, `tail_exponent` | 80, 4096, 2116, 1e-12, 38.0 |
 | certification route per host | `hosts/*/method` | Exp: "analytic endpoint exclusion plus probability-enclosure branch-and-bound"; U(B/2,3B/2): "analytic partition-entropy inequality"; U(B,2B): "analytic K_beta=0 almost surely" |
+
+**How to read the two uniform rows.** Only the exponential host is *computed* by
+`certify_delta_plus.py`. For `U(B/2,3B/2)` and `U(B,2B)` the script records the constants
+$3/2$ and $0$ that Appendix F proves analytically — the JSON registers a proved value, it
+does not derive one, and no branch-and-bound is run for those two rows. That is sound (an
+analytic proof needs no arithmetic) but it means the production chain contains no check on
+them, so `verify_uniform_certificate.py` re-derives both claims and asserts them: the
+quantizer-entropy bound covers $b=\log_2\beta\le0.666260$, the two-tier merge covers
+$b\ge0.153109$, the two ranges overlap and together cover $(0,1)$, and the exact
+$H(M)+b\,\mathbb{E}M$ never drops below 1 — hence $J_\beta\ge3/2$ with equality at $\beta=2$.
 | loss bracket about [0.143, 2.548] | derived from the two columns above | — |
 
 Grid insensitivity of the `Delta_-` column, quoted in the text as orders of magnitude
@@ -168,4 +178,5 @@ tightness percentages in `families[*]/rows`. This script consumes `correlation_f
 * `fig/fig_multires_rate.pdf`, `fig/fig_partition_penalty.pdf` — figures of the Chinese
   master; the submitted English manuscript carries one figure.
 * `corridor.py` (shared corridor kernel), `test_multires.py` (unit tests for the
-  multiresolution construction).
+  multiresolution construction), `verify_uniform_certificate.py` (verification of the two
+  analytic certificates; not part of the production chain and writes no result file).

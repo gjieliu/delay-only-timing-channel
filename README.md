@@ -55,18 +55,23 @@ Approximate wall-clock per step of the full run (2-core reference):
 
 ## Script → result → paper
 
+Table numbers below follow the submitted English manuscript, in which Table I is the
+notation table, Table II is the numerical bracket for the three independent hosts, and
+Table III is the correlated-host table.
+
 | Script | Result | Supports |
 |---|---|---|
 | `multires_bound.py` | `result/multires.json` | fixed-design cost $J_\beta$, bounded-search candidate $\widehat\beta$ and the reported bound $J_{\widehat\beta}$ for the independent hosts, plus three code figures |
 | `certify_delta_plus.py` | `result/delta_plus_certificate.json` | global $\Delta_+$ certificate for the three independent hosts of Table II; the exponential lead example uses analytic-endpoint exclusion plus high-precision interval branch-and-bound, the other two use analytic certificates |
-| `lambda_delta_minus.py` | `result/lambda_delta_minus.json` | Table I corridor exponent and lower endpoint $\Delta_-$ (trapezoidal rule) |
-| `correlation_full.py` | `result/correlation_full.json` | Table II nine rows (midpoint rule), paired standard errors, grid and path self-checks |
-| `delta_minus_width_bounds.py` | `result/delta_minus_width_bounds.json` | $\Delta_-$ single-letter window, inclusive 15/15, tightness |
-| `gmi_demo.py` | `result/gmi_demo.json` | constants $c_1$ and upper bounds for three "marginal–tiering-ratio" designs |
+| `lambda_delta_minus.py` | `result/lambda_delta_minus.json` | the corridor exponent, and the $\Delta_-$ column of Table II (trapezoidal rule) |
+| `correlation_full.py` | `result/correlation_full.json` | Table III(a) (midpoint rule); the run produces nine family-by-persistence rows, of which the paper tabulates four; paired standard errors, grid and path self-checks |
+| `delta_minus_width_bounds.py` | `result/delta_minus_width_bounds.json` | the single-letter window on $\Delta_-$, containment 15/15, tightness |
+| `gmi_demo.py` | `result/gmi_demo.json` | Section V: constants $c_1$ and bounds for three "marginal–tiering-ratio" designs |
 | `gmi_finite.py` | `result/gmi_finite.json` | numerical estimate of the finite-noise-end GMI lower bound |
-| `run_ding.py` | `result/reset_control.json` | control table for the sensitivity of the clearance (reset) probability to correlation |
+| `run_ding.py` | `result/reset_control.json` | Table III(b): how the reset probability affects the persistence sensitivity |
 | `make_figs.py` | `fig/*.pdf` | figures of the Chinese-language manuscript |
 | `make_fig2.py` | `fig_multires_gap.pdf` | the figure actually printed as Fig. 2 in the English manuscript (see below) |
+| `verify_uniform_certificate.py` | — | verification only: re-derives the two analytic $\Delta_+$ certificates of Appendix F (see below) |
 
 ## Redrawing Figure 2 of the paper
 
@@ -76,6 +81,18 @@ The Fig. 2 printed in the English manuscript is drawn by `make_fig2.py`, which c
     python3 make_fig2.py        # -> fig_multires_gap.pdf
 
 The redraw is identical to the PDF in the submission package except for the embedded `/CreationDate` timestamp.
+
+## About `verify_uniform_certificate.py`
+
+`certify_delta_plus.py` computes the exponential host by branch-and-bound, but records the
+two uniform hosts as the constants proved analytically in Appendix F — `[1.5, 1.5]` and
+`[0.0, 0.0]`. Those two entries are proved, not computed, so nothing in the production
+chain checks them. `verify_uniform_certificate.py` closes that gap: it re-derives both
+claims numerically and asserts them, so the recorded constants are checked rather than
+merely asserted. It is a verification script, not part of the production chain, writes no
+result file, and exits 0 when every check passes.
+
+    python3 verify_uniform_certificate.py
 
 ## About `check_consistency.py`
 
